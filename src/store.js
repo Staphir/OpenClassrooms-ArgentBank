@@ -1,9 +1,11 @@
 import { configureStore, createAction, createReducer } from "@reduxjs/toolkit";
 
 const userState = {
-  firstname: 'Tony',
-  name: 'Stark',
-}
+  firstname: '',
+  name: '',
+};
+
+const tokenState = '';
 
 const connectUser = createAction('user/connect', (userData) => {
   return {
@@ -16,24 +18,29 @@ const connectUser = createAction('user/connect', (userData) => {
   }
 })
 
+const setToken = createAction('token/set', (newToken) => {
+  return {
+    payload: {
+      token: newToken
+    }
+  }
+})
+
 const userReducer = createReducer(userState, (builder) => {
   builder
     .addCase(connectUser)
     .addDefaultCase((state) => { return state })
 })
 
-// function userReducer(state = userState, action) {
-//   if (action.type === 'user/connect') {
-//     return {
-//       ...state,
-//       user: action.payload
-//     }
-//   }
-//   return state
-// }
+const tokenReducer = createReducer(tokenState, (builder) => {
+  builder
+    .addCase(setToken)
+    .addDefaultCase((state) => { return state })
+})
 
 export const store = configureStore({
     reducer: {
       user: userReducer,
+      token: tokenReducer
     }
   })

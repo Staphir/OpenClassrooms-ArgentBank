@@ -7,6 +7,9 @@ import './index.css'
 import Header from "./components/header.jsx"
 import Footer from './components/footer.jsx'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import axios from 'axios'
+
+axios.defaults.baseURL = 'http://localhost:3001/api/v1';
 
 const App = () => {
     return (
