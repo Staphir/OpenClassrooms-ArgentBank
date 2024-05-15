@@ -28,8 +28,10 @@ function SignInForm() {
 
       login(formData)
       .then((response) => {
-        // console.log(response);
-        dispatch(connectUser(response));
+        dispatch(connectUser({
+            firstname: response.firstName,
+            lastname: response.lastName
+        }));
         navigate('/profile');
       })
       .catch((error) => {

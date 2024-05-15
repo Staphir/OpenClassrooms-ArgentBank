@@ -7,35 +7,24 @@ const userState = {
 
 const tokenState = '';
 
-export const connectUser = createAction('user/connect', (userData) => {
-  console.log(userData);
-  return {
-    payload: {
-      // user: {
-        firstname: userData.firstName,
-        lastname: userData.lastName
-      }
-    // }
-  }
-})
-
-const setToken = createAction('token/set', (newToken) => {
-  return {
-    payload: {
-      token: newToken
-    }
-  }
-})
+export const connectUser = createAction('connectUser');
 
 const userReducer = createReducer(userState, (builder) => {
   builder
-    .addCase(connectUser)
+    .addCase(connectUser, (state, action) => {
+      state.firstname = action.payload.firstname;
+      state.lastname = action.payload.lastname;
+    })
     .addDefaultCase((state) => { return state })
 })
 
+export const setToken = createAction('setToken');
+
 const tokenReducer = createReducer(tokenState, (builder) => {
   builder
-    .addCase(setToken)
+    .addCase(setToken, (state, action) => {
+      state = action.payload;
+    })
     .addDefaultCase((state) => { return state })
 })
 
