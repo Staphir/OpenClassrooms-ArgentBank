@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import { useState } from 'react';
 import { login } from '../services';
 import { useDispatch } from 'react-redux';
-import { connectUser } from '../store';
+import { setUser } from '../store';
 
 function SignInForm() {
     const dispatch = useDispatch();
@@ -13,7 +13,6 @@ function SignInForm() {
         username: '',
         password: ''
     });
-    // const [userData, setUserData] = useState({});
 
     function handleInputChange(e){
         const {name, value} = e.target;
@@ -28,7 +27,7 @@ function SignInForm() {
 
       login(formData)
       .then((response) => {
-        dispatch(connectUser({
+        dispatch(setUser({
             firstname: response.firstName,
             lastname: response.lastName
         }));

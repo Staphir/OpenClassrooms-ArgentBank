@@ -1,4 +1,5 @@
 import { configureStore, createAction, createReducer } from "@reduxjs/toolkit";
+// import axios from "axios";
 
 const userState = {
   firstname: '',
@@ -7,11 +8,11 @@ const userState = {
 
 const tokenState = '';
 
-export const connectUser = createAction('connectUser');
+export const setUser = createAction('setUser');
 
 const userReducer = createReducer(userState, (builder) => {
   builder
-    .addCase(connectUser, (state, action) => {
+    .addCase(setUser, (state, action) => {
       state.firstname = action.payload.firstname;
       state.lastname = action.payload.lastname;
     })
@@ -23,6 +24,7 @@ export const setToken = createAction('setToken');
 const tokenReducer = createReducer(tokenState, (builder) => {
   builder
     .addCase(setToken, (state, action) => {
+      // axios.defaults.headers.common['Authorization'] = "Bearer" + action.payload //set axios default token
       state = action.payload;
     })
     .addDefaultCase((state) => { return state })
