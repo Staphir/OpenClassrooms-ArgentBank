@@ -1,7 +1,11 @@
 import { Helmet } from "react-helmet-async";
 import Account from "../components/account";
+import { useSelector, useStore } from "react-redux";
+import { getUser } from "../selectors";
 
 function Profile() {
+    // const store = useStore();
+    const userSelector = useSelector(getUser);
 
     const accounts = [
         {
@@ -31,7 +35,8 @@ function Profile() {
                 <h1 className="text-3xl font-bold my-5">
                     Welcome back
                     <br/>
-                    Tony Stark !
+                    {userSelector.firstname} {userSelector.lastname} ! 
+                    {console.log(userSelector)}
                 </h1>
                 <button className="bg-[#00bc77] text-white font-bold p-2">Edit Name</button>
             </div>

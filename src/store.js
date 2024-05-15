@@ -2,19 +2,20 @@ import { configureStore, createAction, createReducer } from "@reduxjs/toolkit";
 
 const userState = {
   firstname: '',
-  name: '',
+  lastname: '',
 };
 
 const tokenState = '';
 
-const connectUser = createAction('user/connect', (userData) => {
+export const connectUser = createAction('user/connect', (userData) => {
+  console.log(userData);
   return {
     payload: {
-      user: {
-        firstname: userData.firstname,
-        name: userData.name
+      // user: {
+        firstname: userData.firstName,
+        lastname: userData.lastName
       }
-    }
+    // }
   }
 })
 

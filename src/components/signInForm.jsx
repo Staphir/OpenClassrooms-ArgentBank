@@ -1,16 +1,19 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser as faSolidCircleUser } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router';
-import axios from 'axios';
 import { useState } from 'react';
 import { login } from '../services';
+import { useDispatch } from 'react-redux';
+import { connectUser } from '../store';
 
 function SignInForm() {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         username: '',
         password: ''
     });
+    // const [userData, setUserData] = useState({});
 
     function handleInputChange(e){
         const {name, value} = e.target;
@@ -22,16 +25,16 @@ function SignInForm() {
 
     function signIn(e){
       e.preventDefault();
-      /*
-      vérif email/password in DB
-      modif store avec firstname and name qui correspond
-      envoie sur profile de l'user 
-      */
-     if(login(formData) === 'error') {
-      alert('Email or password incorrect');
-     } else {
-      navigate('/profile');
-     }
+
+      login(formData)
+      .then((response) => {
+        // console.log(response);
+        dispatch(connectUser(response));
+        navigate('/profile');
+      })
+      .catch((error) => {
+        console.log('Connexion error');
+      })
     };
 
     return(
