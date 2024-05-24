@@ -33,6 +33,7 @@ function Profile() {
         }
     ]
     
+    // Update state when user write in form inputs
     function handleInputChange(e){
         const {name, value} = e.target;
         setFormData({

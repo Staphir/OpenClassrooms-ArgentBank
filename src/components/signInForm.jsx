@@ -14,6 +14,7 @@ function SignInForm() {
         password: ''
     });
 
+    // Update state when user write in form inputs
     function handleInputChange(e){
         const {name, value} = e.target;
         setFormData({
@@ -25,6 +26,7 @@ function SignInForm() {
     function signIn(e){
       e.preventDefault();
 
+    // connect and set redux state
       login(formData)
       .then((response) => {
         dispatch(setUser({

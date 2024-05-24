@@ -4,16 +4,13 @@ import { useState, useRef } from "react";
 
 function Collapse({transaction}) {
     const [isOpen, setIsOpen] = useState(false);
-    const [chevronPosition, setChevronPosition] = useState("up")
     const collapseContentRef = useRef();
-        
+
     const toggleDropdown = () => {
         if(isOpen) {
             setIsOpen(false);
-            setChevronPosition("up");
         } else {
             setIsOpen(true);
-            setChevronPosition("down");
         }
     }
 

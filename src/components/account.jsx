@@ -5,7 +5,6 @@ function Account({account}) {
 
     const handleClick = (e) => {
         e.preventDefault();
-
         navigate('/transactions', {state: {account}});
       };
 

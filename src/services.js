@@ -1,12 +1,19 @@
 import axios from "axios";
 
+
+/**
+ * Connect user
+ *
+ * @async
+ * @param {Array} loginDatas connexion informations
+ * @returns {Object} user profile
+ */
 async function login(loginDatas) {
   try {
     const {data} = await axios.post('/user/login', {
       email: loginDatas.username,
       password: loginDatas.password
     })
-    // dispatch(setToken(data.body.token));
     axios.defaults.headers.common['Authorization'] = "Bearer" + data.body.token; //set axios default token
     const userData = profile();
     return userData;
@@ -17,6 +24,7 @@ async function login(loginDatas) {
   }
 }
 
+// Get user data
 async function profile() {
   try {
     const {data} = await axios.post('/user/profile');
@@ -27,6 +35,13 @@ async function profile() {
   }
 }
 
+
+/**
+ * Edit name in database
+ *
+ * @async
+ * @param {Array} newName new user name
+ */
 async function editName(newName) {
   try {
     await axios.put('/user/profile',{
