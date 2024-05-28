@@ -192,7 +192,7 @@ paths:
           minimum: 0
         - in: body
           name: body
-          description: Account data
+          description: Transaction data
           required: true
           schema:
             $ref: '#/definitions/Transaction'
@@ -242,7 +242,7 @@ paths:
         '500':
           description: Internal Server Error
 
-  /user/transaction:
+  /user/transaction/{accountId}:
     post:
       security:
         - Bearer: []
@@ -256,9 +256,14 @@ paths:
           description: Attach Bearer JWT token
           required: true
           type: string
+        - in: path
+          name: accountId
+          required: true
+          type: integer
+          minimum: 0
         - in: body
           name: body
-          description: Account data
+          description: Transaction data
           required: true
           schema:
             $ref: '#/definitions/Transaction'

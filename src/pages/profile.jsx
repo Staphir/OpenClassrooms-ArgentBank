@@ -5,9 +5,12 @@ import { getUser } from "../selectors";
 import { useState } from "react";
 import { editName } from "../services";
 import { setUser } from "../store";
+import { useEffect } from "react";
+import { useNavigate } from "react-router";
 
 function Profile() {
     const userSelector = useSelector(getUser);
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [onEditName, setOnEditName] = useState(false)
     const [formData, setFormData] = useState({
@@ -15,6 +18,12 @@ function Profile() {
         lastname: ''
     });
     
+    useEffect(() => {
+        if (userSelector.firstname === '' && userSelector.lastname === '') {
+            navigate('/sign-in');
+        }
+    }, []);
+
     const accounts = [
         {
             title: "Argent Bank Checking (x8349)",
